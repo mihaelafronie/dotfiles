@@ -1,0 +1,15 @@
+alias nv="nvim"
+alias vim="nvim"
+
+# yarn
+alias y='yarn'
+alias ya='yarn add'
+alias yad='yarn add --dev'
+alias yr='yarn run'
+alias yR='yarn remove'
+alias yt='yarn test'
+alias yu='yarn upgrade'
+alias yui='yarn upgrade-interactive'
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
