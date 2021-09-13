@@ -16,6 +16,24 @@ export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
+# Treatwell path
+# ------------------------------------------
+# twbox
+export PATH="$HOME/wahanda/twbox/bin:$PATH"
+
+# pact
+export PATH="$HOME/wahanda/pact/bin:$PATH"
+
+# java
+ export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+ export JAVA_HOME="/usr/local/opt/openjdk@11"
+
+# gitflow
+export PATH="$HOME/wahanda/gitflow:$PATH"
+
+# Twist
+export PATH="$HOME/wahanda/platform/dev-tools/bin:$PATH"
+
 export ZPLUG_USE_CACHE=true
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
