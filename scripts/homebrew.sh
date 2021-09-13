@@ -21,7 +21,10 @@ brew install zsh
 brew install zplug
 brew install spaceship
 
+brew install python3
 brew install neovim
+pip3 install neovim
+pip3 install pynvim
 
 # fzf
 brew install fzf
