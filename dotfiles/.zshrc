@@ -52,3 +52,7 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # https://github.com/mroth/scmpuff
 eval "$(scmpuff init -s --aliases=false)"
 
+for file in ~/.{aliases}; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
