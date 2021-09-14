@@ -11,3 +11,5 @@ fi
 
 # Set Homebrew Zsh as default shell
 chsh -s "$(which zsh)"
+
+git clone https://github.com/olivierverdier/zsh-git-prompt.git

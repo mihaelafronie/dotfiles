@@ -39,10 +39,18 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 ZSH_GIT_PROMPT="$HOME/zsh-git-prompt/zshrc.sh"
-# CUSTOM_GIT="$HOME/dotfiles/scripts/custom_git.zsh"
+CUSTOM_GIT="$HOME/dotfiles/scripts/custom_git.zsh"
 
 [ -s $ZSH_GIT_PROMPT ] && source $ZSH_GIT_PROMPT
-#[ -s $CUSTOM_GIT ] && source $CUSTOM_GIT
+[ -s $CUSTOM_GIT ] && source $CUSTOM_GIT
+
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_PREFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{●%G%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[blue]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[blue]%}◒"
 
 zplug "lib/directories", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
@@ -68,7 +76,7 @@ SPACESHIP_PROMPT_ORDER=(
   user          # Username section
   dir           # Current directory section
   host          # Hostname section
-  #custom_git
+  custom_git
   line_sep      # Line break
   jobs          # Background jobs indicator
   char          # Prompt character
