@@ -10,10 +10,75 @@ call plug#begin(g:plugin_path)
 " ------------------------------------------------------------------------------
 
 Plug 'folke/tokyonight.nvim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'svermeulen/vim-easyclip'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
+lua << EOF
+require'lualine'.setup {
+  options = {
+    icons_enabled = false,
+    theme = 'auto',
+    component_separators = {},
+    section_separators = {},
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {{'filename', path = 1}},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {
+      {
+        'diagnostics',
+        sources = {'coc'},
+        sections = {'error', 'warn'},
+        symbols = {error = 'errors: ', warn = 'warnings: ', info = 'info: '}
+      }
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {{'filename', path = 1}},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+EOF
+
+lua << EOF
+vim.g.tokyonight_italic_functions = false
+vim.g.tokyonight_italic_variables = false
+vim.g.tokyonight_italic_comments = false
+vim.g.tokyonight_italic_keywords = false
+vim.g.tokyonight_colors = { bg_popup = "#485173", bg_float = "#485173"}
+EOF
+
 colorscheme tokyonight
+
+set noswapfile
+set nobackup
+set nowb
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags='li\|p'
+
+" Set <space> to leader
+let mapleader=' '
+let maplocalleader='\'
+ 
+" Turn off swapfiles
+set noswapfile
+set nobackup
+set nowb
 
 " Allow editing of binary files
 " Must be set before expandtab
@@ -173,3 +238,70 @@ set showcmd
 " Line numbers
 set number
 set relativenumber
+
+" Key mappings
+" ------------------------------------------------------------------------------
+
+" gf but in a vsplit
+nnoremap gv :vertical wincmd f<cr>
+
+" Save file
+nnoremap <silent><leader>w :silent wa<cr>
+
+" Force j and k to work on display lines
+nnoremap k gk
+nnoremap j gj
+vnoremap k gk
+vnoremap j gj
+
+" Delete line but preserve the space
+nnoremap dD S<Esc>
+
+" Make `Y` work from the cursor to the end of line
+nnoremap Y y$
+
+" Reformat whole file and move back to original position
+nnoremap g= gg=G``
+
+" Automatically jump to end of pasted text
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+" Split
+noremap <silent><leader>x :split<cr>
+noremap <silent><leader>v :vsplit<cr>
+
+" Switch buffers
+nnoremap <silent>H :silent bp<CR>
+nnoremap <silent>L :silent bn<CR>
+
+" Spellcheck
+nnoremap <F6> :setlocal spell!<cr>
+
+" Clear search (highlight)
+nnoremap <silent> <leader>k :noh<cr>
+
+" Automatically 'gv' (go to previously selected visual block)
+" after indenting or unindenting.
+vnoremap < <gv
+vnoremap > >gv
+
+" Press enter for newline without insert
+nnoremap <cr> o<esc>
+" but don't effect command line mode
+autocmd CmdwinEnter * nnoremap <CR> <CR>
+autocmd CmdwinLeave * nnoremap <cr> o<esc>
+
+" Allow sourcing of vimrc
+nnoremap <leader>y :source $MYVIMRC<cr>
+
+if exists(':tnoremap')
+  " Allow movement seamlessly with terminals
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+  tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+endif
+

@@ -38,6 +38,12 @@ export ZPLUG_USE_CACHE=true
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+ZSH_GIT_PROMPT="$HOME/zsh-git-prompt/zshrc.sh"
+# CUSTOM_GIT="$HOME/dotfiles/scripts/custom_git.zsh"
+
+[ -s $ZSH_GIT_PROMPT ] && source $ZSH_GIT_PROMPT
+#[ -s $CUSTOM_GIT ] && source $CUSTOM_GIT
+
 zplug "lib/directories", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
@@ -52,6 +58,21 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions", defer:2
 
 zplug load
+
+SPACESHIP_DIR_COLOR="yellow"
+SPACESHIP_USER_SHOW="true"
+SPACESHIP_CHAR_COLOR_SUCCESS="white"
+SPACESHIP_CHAR_COLOR_FAILURE="white"
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  #custom_git
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  char          # Prompt character
+)
 
 # Python3
 export PATH=/usr/local/opt/python/libexec/bin:$PATH
@@ -70,7 +91,4 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # https://github.com/mroth/scmpuff
 eval "$(scmpuff init -s --aliases=false)"
 
-for file in ~/.{aliases}; do
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
+[ -s ~/.aliases ] && source ~/.aliases
