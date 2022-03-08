@@ -2,6 +2,7 @@ echo "==> 🔗 Symlinking dotfiles to ~/"
 
 ln -s ~/dotfiles/dotfiles/.zshrc ~/.zshrc
 ln -s ~/dotfiles/dotfiles/.aliases ~/.aliases
+ln -s ~/dotfiles/dotfiles/.functions ~/.functions
 ln -s ~/dotfiles/dotfiles/.hushlogin ~/.hushlogin
 
 # Add Homebrew Zsh to accepted shells if not present

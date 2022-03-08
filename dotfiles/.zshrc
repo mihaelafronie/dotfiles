@@ -31,9 +31,6 @@ export PATH="$HOME/wahanda/pact/bin:$PATH"
 # gitflow
 export PATH="$HOME/wahanda/gitflow:$PATH"
 
-# Twist
-export PATH="$HOME/wahanda/platform/dev-tools/bin:$PATH"
-
 export ZPLUG_USE_CACHE=true
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -100,3 +97,13 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 eval "$(scmpuff init -s --aliases=false)"
 
 [ -s ~/.aliases ] && source ~/.aliases
+[ -s ~/.functions ] && source ~/.functions
+[ -s ~/.work ] && source ~/.work
+
+#TW OVERRIDES
+if [ -f ~/.treatwellrc ]; then
+    . ~/.treatwellrc
+fi
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

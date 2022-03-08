@@ -1,0 +1,20 @@
+# fshow_preview - git commit browser with previews
+alias gLogAlias='git log --graph --color=always --format="%C(auto)%h%d %s %C(bold blue)%C(bold)%cr% C(auto)%an" "$@"'
+local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+
+fshow() {
+    gLogAlias |
+        fzf --height 100% --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview $_viewGitLogLine \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | xclip"
+}
+
+fcs() {
+  local commits commit
+  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse master..) &&
+  commit=$(echo "$commits" | fzf-tmux --tac +s +m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
+}
