@@ -35,20 +35,6 @@ export ZPLUG_USE_CACHE=true
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-ZSH_GIT_PROMPT="$HOME/zsh-git-prompt/zshrc.sh"
-CUSTOM_GIT="$HOME/dotfiles/scripts/custom_git.zsh"
-
-[ -s $ZSH_GIT_PROMPT ] && source $ZSH_GIT_PROMPT
-[ -s $CUSTOM_GIT ] && source $CUSTOM_GIT
-
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[red]%}%{●%G%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[blue]%}%{✚%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[blue]%}◒"
-
 zplug "lib/directories", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
@@ -56,7 +42,6 @@ zplug "lib/clipboard", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
-zplug "denysdovhan/spaceship-prompt", as:theme
 zplug "hlissner/zsh-autopair", defer:3
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -64,20 +49,7 @@ zplug "zsh-users/zsh-completions", defer:2
 
 zplug load
 
-SPACESHIP_DIR_COLOR="yellow"
-SPACESHIP_USER_SHOW="true"
-SPACESHIP_CHAR_COLOR_SUCCESS="white"
-SPACESHIP_CHAR_COLOR_FAILURE="white"
-
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  custom_git
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  char          # Prompt character
-)
+eval "$(starship init zsh)"
 
 # Python3
 export PATH=/usr/local/opt/python/libexec/bin:$PATH

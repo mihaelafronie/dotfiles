@@ -19,7 +19,7 @@ brew install curl
 # Install zsh
 brew install zsh
 brew install zplug
-brew install spaceship
+brew install starship
 
 brew install python3
 brew install neovim
